@@ -32,7 +32,7 @@ def searchIngredients(keywords):
       for word in ingr["name"].split():
         for keyword in iterable_keywords:
           # checks similarity of word for word, then similarity of entire phrase
-          if dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(ingr["name"], keywords) < - 0.6:
+          if (dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(word.lower(), keyword) < -0.6):
             ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
             continue
 
@@ -56,7 +56,7 @@ def searchProducts(input):
     return prod_list
 
 
-# print(searchIngredients("Organic+Banana"))
+print(searchIngredients("mixed nuts"))
 # print(searchProducts([{'id': 81, 'name': 'Organic Banana'}]))
 
 

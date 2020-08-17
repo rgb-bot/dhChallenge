@@ -2,6 +2,10 @@
 
 A RESTful implementation of a product search with an ingredient as a parameter
 
+## Features
+
+I have implemented a custom version of the Dice Coefficient to interpret typos. The search algorithm is fairly robust, and handles all types of errors. For example, try searching for "berry", "aracola", " bbananas", and "shrooms".
+
 ## Dependencies and Rquirements
 
 Python 3 is required for this code.
@@ -25,11 +29,5 @@ Then in Postman, perform a request with the following:
 GET http://127.0.0.1:5000/search/<search+term>
 ```
 Note that spaces in the query should be separated by a "+" sign.
-
-## Features
-
-The search algorithm implements a custom version of the Dice Coefficient to interpret typos.
-
-For example, try searching for "berry", "aracola", " bbananas."
 
 

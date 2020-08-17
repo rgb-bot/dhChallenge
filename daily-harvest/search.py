@@ -56,7 +56,4 @@ def searchProducts(input):
     return prod_list
 
 
-print(searchIngredients("mixed nuts"))
-# print(searchProducts([{'id': 81, 'name': 'Organic Banana'}]))
-
 

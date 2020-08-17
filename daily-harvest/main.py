@@ -16,7 +16,5 @@ def createOutput(input):
 
 
 
-# print(createOutput("organic+banana"))
-
 
 

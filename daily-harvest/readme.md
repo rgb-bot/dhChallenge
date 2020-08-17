@@ -2,9 +2,15 @@
 
 A RESTful implementation of a product search with an ingredient as a parameter
 
-## Features
+## String Matching Algorithm
 
-I have implemented a custom version of the Dice Coefficient to interpret typos. The search algorithm is fairly robust, and handles all types of errors. For example, try searching for "berry", "aracola", " bbananas", and "shrooms".
+I have implemented a custom version of the Dice Coefficient to interpret typos. The search algorithm is fairly robust, and handles many types of user input typos. For example, try searching for "organic+shrooms", "berry", "aracola", and " bbananas".
+
+## Edge Cases
+
+If there is no match, the code sends a "No matches found" response.
+
+If there are multiple matches, the code sends a list of possible ingredient matches and instructs the user to search again.
 
 ## Dependencies and Rquirements
 
@@ -21,7 +27,8 @@ pip install flask
 Run by executing the following line:
 
 ```bash
-python3 fetch.py
+python3 server.py
+
 ```
 Then in Postman, perform a request with the following:
 

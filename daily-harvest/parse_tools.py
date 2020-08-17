@@ -44,4 +44,3 @@ def dice_coefficient(a,b):
     # ex: eliminates "pineapple" matching to "apple"
     return 0
 
-# print(dice_coefficient("cola", "Maple"))

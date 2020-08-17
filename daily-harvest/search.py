@@ -7,7 +7,7 @@ def searchIngredients(keywords):
   ingr_list = []
 
   ## clean data
-  keywords = keywords.lower().strip().split()
+  keywords = keywords.lower().strip().split("+")
 
   #remove organic for initial search
   organic = False
@@ -23,7 +23,7 @@ def searchIngredients(keywords):
   #exact single word match
   for ingr in ingredients:
     if keywords in ingr["name"].lower():
-      ingr_list.append({ingr["id"]: ingr["name"]})
+      ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
 
   #dice coefficient fuzzy match
   iterable_keywords = keywords.split()
@@ -33,7 +33,7 @@ def searchIngredients(keywords):
         for keyword in iterable_keywords:
           # checks similarity of word for word, then similarity of entire phrase
           if dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(ingr["name"], keywords) < - 0.6:
-            ingr_list.append({ingr["id"]: ingr["name"]})
+            ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
             continue
 
   if organic and ("Organic" in ingr_list):
@@ -44,17 +44,19 @@ def searchIngredients(keywords):
   return ingr_list
 
 
-print(searchIngredients('aracola'))
-
-
 def searchProducts(input):
   prod_list = []
-  for item in products:
-    if item["id"] in item["ingredientIds"]:
-      prod_list.append(item)
+  for item in input:
+    for product in products:
+      if item["id"] in product["ingredientIds"]:
+        prod_list.append(product["name"])
   if len(prod_list) == 0:
     return "Not Found"
   else:
     return prod_list
 
-# print(searchProducts(searchIngredients('blieberry')))
+
+# print(searchIngredients("Organic+Banana"))
+# print(searchProducts([{'id': 81, 'name': 'Organic Banana'}]))
+
+

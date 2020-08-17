@@ -30,6 +30,6 @@ Note that spaces in the query should be separated by a "+" sign.
 
 The search algorithm implements a custom version of the Dice Coefficient to interpret typos.
 
-For example, try searching for "berry", "shrooms", " bbananas."
+For example, try searching for "berry", "aracola", " bbananas."
 
 

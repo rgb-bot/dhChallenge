@@ -17,29 +17,31 @@ def searchIngredients(keywords):
 
   keywords = " ".join(keywords)
   if len(keywords) == 0:
-    return []
+    return [{}]
 
 
   #exact single word match
   for ingr in ingredients:
-    if keywords in ingr["name"].lower():
+    menu_name = ingr["name"].lower()
+    if keywords in menu_name and dice_coefficient(menu_name, keywords) > 0.6 and dice_coefficient(menu_name, keywords) < -0.5:
       ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
 
-  #dice coefficient fuzzy match
-  iterable_keywords = keywords.split()
-  if len(ingr_list) == 0:
-    for ingr in ingredients:
-      for word in ingr["name"].split():
-        for keyword in iterable_keywords:
-          # checks similarity of word for word, then similarity of entire phrase
-          if (dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(word.lower(), keyword) < -0.6):
-            ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
-            continue
+  #dice coefficient fuzzy matchn
+  if len(keywords) > 3:
+    iterable_keywords = keywords.split()
+    if len(ingr_list) == 0:
+      for ingr in ingredients:
+        for word in ingr["name"].split():
+          for keyword in iterable_keywords:
+            # checks similarity of word for word, then similarity of entire phrase
+            if (dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(word.lower(), keyword) < -0.6):
+              ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
+              continue
 
-  if organic and ("Organic" in ingr_list):
-    for item in ingr_list:
-      if "Organic" not in item:
-        ingr_list.remove(item)
+    if organic and ("Organic" in ingr_list):
+      for item in ingr_list:
+        if "Organic" not in item:
+          ingr_list.remove(item)
 
   return ingr_list
 

@@ -31,7 +31,7 @@ def dice_coefficient(a,b):
 
     score = float(2*matches)/float(lena + lenb)
 
-    # customization for Daily Harvest challenge
+    # customization for ingredient matches
     if len(a) and len(b):
         a_list = a.split()
         b_list = b.split()

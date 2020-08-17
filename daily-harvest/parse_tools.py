@@ -31,8 +31,8 @@ def dice_coefficient(a,b):
 
     score = float(2*matches)/float(lena + lenb)
 
-    #customization for Daily Harvest challenge
-    if (len(a) and len(b)):
+    # customization for Daily Harvest challenge
+    if len(a) and len(b):
         a_list = a.split()
         b_list = b.split()
         for a_item in a_list:
@@ -42,4 +42,6 @@ def dice_coefficient(a,b):
 
     #if the the first letter does not match anywhere, adjust score to no match
     # ex: eliminates "pineapple" matching to "apple"
-    return score - .5
+    return 0
+
+# print(dice_coefficient("applee", "Maple"))

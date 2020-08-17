@@ -28,6 +28,8 @@ Note that spaces in the query should be separated by a "+" sign.
 
 ## Features
 
-The search algorithm is very forgiving with typos. It also detects queries for fruits that don't exist in the database. For example, try searching for "Organci banas", or "watermln".
+The search algorithm implements a custom version of the Dice Coefficient to interpret typos.
+
+For example, try searching for "berry", "shrooms", " bbananas."
 
 

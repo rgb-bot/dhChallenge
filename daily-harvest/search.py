@@ -20,7 +20,6 @@ def searchIngredients(keywords):
     return []
 
 
-
   #exact single word match
   for ingr in ingredients:
     if keywords in ingr["name"].lower():
@@ -33,11 +32,11 @@ def searchIngredients(keywords):
       for word in ingr["name"].split():
         for keyword in iterable_keywords:
           # checks similarity of word for word, then similarity of entire phrase
-          if dice_coefficient(word.lower(), keyword) > .9 and dice_coefficient(ingr["name"], keywords) > .1:
+          if dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(ingr["name"], keywords) < - 0.6:
             ingr_list.append({ingr["id"]: ingr["name"]})
             continue
 
-  if organic and "Organic" in ingr_list:
+  if organic and ("Organic" in ingr_list):
     for item in ingr_list:
       if "Organic" not in item:
         ingr_list.remove(item)
@@ -45,7 +44,7 @@ def searchIngredients(keywords):
   return ingr_list
 
 
-print(searchIngredients('cbd'))
+print(searchIngredients('aracola'))
 
 
 def searchProducts(input):

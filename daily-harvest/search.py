@@ -55,10 +55,13 @@ def search_ingredients(query_string, ingr_source, products_source):
               ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
               continue
 
-    if organic and ("Organic" in ingr_list):
-      for item in ingr_list:
-        if "Organic" not in item:
-          ingr_list.remove(item)
+    #if one of the ingredients contain "organic" and the query string specified organic,
+    #delete all non-organic ingredients
+    ingr_names_flattened = ' '.join(list(map(lambda x: x["name"], ingr_list)))
+    if organic and ("Organic" in ingr_names_flattened):
+      for itemJSON in ingr_list:
+        if "Organic" not in itemJSON["name"]:
+          ingr_list.remove(itemJSON)
 
   return ingr_list
 

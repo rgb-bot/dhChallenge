@@ -40,6 +40,7 @@ def search_ingredients(keywords):
     # For example, "peas" has an exact match in "peanuts", but it should not match with "Organic Peanut Butter"
     if keywords in menu_name and (dice_coefficient(menu_name, keywords) > 0.6 or dice_coefficient(menu_name, keywords) < -0.5):
       ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
+      break
 
   #dice coefficient fuzzy match
   if len(keywords) > 3:

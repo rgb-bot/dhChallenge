@@ -18,7 +18,7 @@ If there are multiple matches, the code sends a list of possible ingredient matc
 Example: {"products": [],
           "ingredient_searched": null,
           "error": "There are multiple matches for your search. Try searching again
-          with: Organic Apple, Organic Apple Cider Vinegar"}
+                   with: Organic Apple, Organic Apple Cider Vinegar"}
 ```
 Else, the code sends a list of products that contain that ingredient.
 ```

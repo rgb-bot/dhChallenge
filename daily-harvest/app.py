@@ -34,14 +34,14 @@ def create_output(query_string, ingr_source, products_source):
             "error": None
         })
     else:
-        array = []
+        products_list = []
         for item in returned_ingr:
-            array.append(item["name"])
+            products_list.append(item["name"])
         # return "There are multiple matches for your search. Try searching again with: \n \n" + ", ".join(array)
         return json.dumps({
             "products": [],
             "ingredient_searched": None,
-            "error": "There are multiple matches for your search. Try searching again with: " + ", ".join(array)
+            "error": "There are multiple matches for your search. Try searching again with: " + ", ".join(products_list)
         })
 
 app = Flask(__name__)

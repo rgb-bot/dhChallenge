@@ -1,9 +1,10 @@
 from flask import Flask
 from search import *
 import json
+from fetch import ingredients, products
 
 
-def create_output(input):
+def create_output(input, ingr_source, products_source):
     '''Creates response JSONs.
 
     Args:
@@ -17,24 +18,24 @@ def create_output(input):
         }
         '''
 
-    ingredients = search_ingredients(input)
+    returned_ingr = search_ingredients(input, ingr_source, products_source)
 
-    if len(ingredients) == 0:
+    if len(returned_ingr) == 0:
         return json.dumps({
             "products": [],
             "error": "Oops! No matching ingredients found."
         })
-    elif len(ingredients) == 1:
-        products = search_products(ingredients)
-        # return "The following contain " + ingredients[0]["name"] + ": " + "\n \n" + ", ".join(products)
+    elif len(returned_ingr) == 1:
+        returned_products = search_products(returned_ingr, products_source)
+        # return "The following contain " + returned_ingr[0]["name"] + ": " + "\n \n" + ", ".join(products)
         return json.dumps({
-            "products": products,
-            "ingredient_searched": ingredients[0]["name"],
+            "products": returned_products,
+            "ingredient_searched": returned_ingr[0]["name"],
             "error": None
         })
     else:
         array = []
-        for item in ingredients:
+        for item in returned_ingr:
             array.append(item["name"])
         # return "There are multiple matches for your search. Try searching again with: \n \n" + ", ".join(array)
         return json.dumps({
@@ -46,6 +47,6 @@ def create_output(input):
 app = Flask(__name__)
 @app.route('/search/<query>')
 def home(query):
-    return create_output(query)
+    return create_output(query, ingredients, products)
 if __name__ == '__main__':
     app.run(debug=True)

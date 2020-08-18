@@ -1,18 +1,20 @@
 import unittest
 from app import app
+from app import *
 from fetch import *
 from search import *
+from fetch import ingredients, products
 
 class TestStringAlgo(unittest.TestCase):
 
   def test_correct_format(self):
-    self.assertTrue(search_ingredients("Organic + Banana")[0]["id"])
-    self.assertTrue(search_ingredients("Organic + Banana")[0]["name"])
-    self.assertTrue(type(search_products([{"id": 65, "name": "Red Miso"}])), list)
+    self.assertTrue(search_ingredients("Organic + Banana", ingredients, products)[0]["id"])
+    self.assertTrue(search_ingredients("Organic + Banana", ingredients, products)[0]["name"])
+    self.assertTrue(type(search_products([{"id": 65, "name": "Red Miso"}], products)), list)
 
   def test_basic_matching(self):
-    self.assertEqual(type(search_ingredients("applee")), list)
-    self.assertTrue(type(create_output("bricks")) == str)
+    self.assertEqual(type(search_ingredients("applee", ingredients, products)), list)
+    self.assertTrue(type(create_output("bricks", ingredients, products)) == str)
 
 
 class TestJSONs(unittest.TestCase):

@@ -5,7 +5,7 @@ from fetch import ingredients, products
 
 
 def create_output(query_string, ingr_source, products_source):
-    '''Creates response JSONs.
+    '''Returns a reponse JSON that contains the results of user search.
 
     Args:
         query_string: user search query string

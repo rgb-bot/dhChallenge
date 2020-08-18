@@ -4,11 +4,11 @@ import json
 from fetch import ingredients, products
 
 
-def create_output(input, ingr_source, products_source):
+def create_output(query_string, ingr_source, products_source):
     '''Creates response JSONs.
 
     Args:
-        input: user search query string
+        query_string: user search query string
     Returns:
         A JSON with a list of products or an error message. For example,
         {
@@ -18,7 +18,7 @@ def create_output(input, ingr_source, products_source):
         }
         '''
 
-    returned_ingr = search_ingredients(input, ingr_source, products_source)
+    returned_ingr = search_ingredients(query_string, ingr_source, products_source)
 
     if len(returned_ingr) == 0:
         return json.dumps({

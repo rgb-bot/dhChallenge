@@ -20,7 +20,7 @@ def search_ingredients(query_string, ingr_source, products_source):
   ingr_list = []
 
 
-  ## clean data
+  ## remove plus signs and standardize to lowercase
   keywords_temp = query_string.lower().strip().split("+")
 
   #remove organic for initial search
@@ -39,7 +39,7 @@ def search_ingredients(query_string, ingr_source, products_source):
   for ingr in ingr_source:
     menu_name = ingr["name"].lower()
     # detects errant partial matches.
-    # For example, "peas" has an exact match in "peanuts", but it should not match with "Organic Peanut Butter"
+    # for example, "peas" has an exact match in "peanuts", but it should not match with "Organic Peanut Butter"
     if query_string in menu_name and (dice_coefficient(menu_name, query_string) > 0.6 or dice_coefficient(menu_name, query_string) < -0.5):
       ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
 
@@ -70,7 +70,7 @@ def search_products(input, products_source):
       if item["id"] in product["ingredientIds"]:
         prod_list.append(product["name"])
   if len(prod_list) == 0:
-    return "Not Found"
+    return [None]
   else:
     return prod_list
 

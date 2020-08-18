@@ -19,14 +19,14 @@ def create_output(query_string, ingr_source, products_source):
         '''
 
     returned_ingr = search_ingredients(query_string, ingr_source, products_source)
+    returned_products = search_products(returned_ingr, products_source)
 
-    if len(returned_ingr) == 0:
+    if len(returned_ingr) == 0 or returned_products[0] == None:
         return json.dumps({
             "products": [],
             "error": "Oops! No matching ingredients found."
         })
     elif len(returned_ingr) == 1:
-        returned_products = search_products(returned_ingr, products_source)
         # return "The following contain " + returned_ingr[0]["name"] + ": " + "\n \n" + ", ".join(products)
         return json.dumps({
             "products": returned_products,

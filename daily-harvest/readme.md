@@ -27,7 +27,7 @@ pip install flask
 Run by executing the following line:
 
 ```bash
-python3 server.py
+python3 app.py
 
 ```
 Then in Postman, perform a request with the following:

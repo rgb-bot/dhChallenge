@@ -2,7 +2,20 @@ from fetch import ingredients, products
 from parse_tools import dice_coefficient
 
 
-def searchIngredients(keywords):
+def search_ingredients(keywords):
+  '''Retrieves ingredients that match the keyword.
+  Args:
+    keywords: User search query string.
+
+  Returns:
+    An array of dicts representing each ingredient. For example:
+    [
+      {"id": 81,
+      "name": "Organic Bananas"
+      }
+    ]
+
+  '''
 
   ingr_list = []
 
@@ -23,10 +36,12 @@ def searchIngredients(keywords):
   #exact single word match
   for ingr in ingredients:
     menu_name = ingr["name"].lower()
-    if keywords in menu_name and dice_coefficient(menu_name, keywords) > 0.6 and dice_coefficient(menu_name, keywords) < -0.5:
+    # detects errant partial matches.
+    # For example, "peas" has an exact match in "peanuts", but it should not match with "Organic Peanut Butter"
+    if keywords in menu_name and (dice_coefficient(menu_name, keywords) > 0.6 or dice_coefficient(menu_name, keywords) < -0.5):
       ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
 
-  #dice coefficient fuzzy matchn
+  #dice coefficient fuzzy match
   if len(keywords) > 3:
     iterable_keywords = keywords.split()
     if len(ingr_list) == 0:
@@ -46,7 +61,7 @@ def searchIngredients(keywords):
   return ingr_list
 
 
-def searchProducts(input):
+def search_products(input):
   prod_list = []
   for item in input:
     for product in products:

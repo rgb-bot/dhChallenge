@@ -4,7 +4,7 @@ A RESTful implementation of a product search with an ingredient as a parameter
 
 ## String Matching Algorithm
 
-I have implemented a custom version of the Dice Coefficient to interpret typos. The search algorithm is fairly robust, and handles many types of user input typos. For example, try searching for "organic+shrooms", "berry", "aracola", and " bbananas".
+I have implemented a custom version of the Dice Coefficient to interpret typos. The search algorithm is fairly robust, and handles many types of user input typos. For example, try searching for "organic+mushroms", "berry", "aracola", and " bbananas".
 
 ## Output Format
 

@@ -46,12 +46,13 @@ def search_ingredients(query_string, ingr_source, products_source):
   #dice coefficient fuzzy match
   if len(query_string) > 3:
     keywords = query_string.split()
-    if len(ingr_list) == 0:
-      for ingr in ingr_source:
-        for word in ingr["name"].split():
-          for keyword in keywords:
-            # checks similarity of word for word, then similarity of entire phrase
-            if (dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(word.lower(), keyword) < -0.6):
+    for ingr in ingr_source:
+      for word in ingr["name"].split():
+        for keyword in keywords:
+          # checks similarity of word for word, then similarity of entire phrase
+          if (dice_coefficient(word.lower(), keyword) > .8 or dice_coefficient(word.lower(), keyword) < -0.6):
+            ingr_names_flattened = ', '.join(list(map(lambda x: x["name"], ingr_list)))
+            if ingr["name"] not in ingr_names_flattened:
               ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
               continue
 

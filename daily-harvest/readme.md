@@ -38,9 +38,10 @@ pip install flask
 
 ## Usage
 
-Run by executing the following line:
+Run by executing the following lines:
 
 ```bash
+
 python3 app.py
 
 ```

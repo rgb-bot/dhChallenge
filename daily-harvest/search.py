@@ -19,9 +19,9 @@ def search_ingredients(query_string, ingr_source, products_source):
 
   ingr_list = []
 
-
   ## remove plus signs and standardize to lowercase
   keywords_temp = query_string.lower().strip().split("+")
+  original_string = " ".join(keywords_temp)
 
   #remove organic for initial search
   organic = False
@@ -35,7 +35,7 @@ def search_ingredients(query_string, ingr_source, products_source):
     return [{}]
 
 
-  #exact single word match
+  #exact phrase match
   for ingr in ingr_source:
     menu_name = ingr["name"].lower()
     # detects errant partial matches.
@@ -44,7 +44,7 @@ def search_ingredients(query_string, ingr_source, products_source):
       ingr_list.append({"id": ingr["id"], "name": ingr["name"]})
 
   #dice coefficient fuzzy match
-  if len(query_string) > 3:
+  if len(query_string) > 3 and dice_coefficient(ingr_list[0]["name"].lower(), original_string) != 1:
     keywords = query_string.split()
     for ingr in ingr_source:
       for word in ingr["name"].split():
